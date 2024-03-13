@@ -1,0 +1,54 @@
+   <div id="edit" *ngIf="recipe">
+    
+   
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="recipe.name">
+    </div>
+    <div>
+      <label for="categoryId">Category ID:</label>
+      <input type="number" id="categoryId" [(ngModel)]="recipe.categoryId">
+    </div>
+    <div>
+      <label for="preparationTime">Preparation Time:</label>
+      <input type="number" id="preparationTime" [(ngModel)]="recipe.preparationTime">
+    </div>
+    
+    <div>
+        <label for="difficulty">Difficulty:</label>
+        <input type="number" id="difficulty" name="difficulty" [(ngModel)]="recipe.difficulty" min="1" max="5">
+        <div *ngIf="recipe.difficulty !== null && (recipe.difficulty < 1 || recipe.difficulty > 5)">
+          <div>
+            Difficulty must be between 1 and 5.
+          </div>
+        </div>
+    </div>
+     <div>
+   
+     <div class="form-group">
+      <label for="ingredientInput">Ingredients</label>
+      <input type="text" class="form-control" id="ingredientInput" [(ngModel)]="ingredientInput" name="ingredientInput">
+      <button type="button" class="btn btn-primary mt-2" (click)="addIngredient()">Add Ingredient</button>
+      <ul class="list-group mt-2">
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="instructionInput">Instructions</label>
+      <input type="text" class="form-control" id="instructionInput" [(ngModel)]="instructionInput" name="instructionInput">
+      <button type="button" class="btn btn-primary mt-2" (click)="addInstruction()">Add Instruction</button>
+      <ol class="list-group mt-2">
+        <li class="list-group-item" *ngFor="let instruction of recipe.instructions">{{ instruction }}</li>
+      </ol>
+    </div>
+    
+    <div>
+      <label for="image">Image URL:</label>
+      <input type="text" id="image" [(ngModel)]="recipe.image">
+    </div>
+    <button (click)="saveChanges()" [disabled]="recipe.difficulty !== null && (recipe.difficulty < 1 || recipe.difficulty > 5)">
+        Save Changes
+      </button>    <button (click)="cancel()">Cancel</button>
+  </div>
+  
